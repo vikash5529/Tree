@@ -1,0 +1,17 @@
+<mat-card class="container">
+  <div *ngFor="let item of list | keyvalue: descOrder">
+    <ng-container *ngIf="isArray(item.value); else renderVanilla">
+      <p>
+        <span>{{ item.key }}</span
+        >:
+      </p>
+      <app-child-tree [childList]="item.value"></app-child-tree>
+    </ng-container>
+    <ng-template #renderVanilla>
+      <p>
+        <span>{{ item.key }}</span
+        >: <span class="item">{{ item.value }}</span>
+      </p>
+    </ng-template>
+  </div>
+</mat-card>

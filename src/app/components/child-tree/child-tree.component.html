@@ -1,0 +1,34 @@
+
+  <mat-card-content>
+    <table>
+      <tr>
+        <ng-container *ngFor="let list of childList | keyvalue: descOrder">
+          <td>
+            <tr>
+              <th>{{ list.key }}</th>
+            </tr>
+            <ng-container *ngIf="!isTypeArray(list.value); else renderVanilla">
+              <tr class="item">
+                {{
+                  list.value
+                }}
+              </tr>
+            </ng-container>
+            <ng-template #renderVanilla>
+              <tr (click)="expand(list.value, list.key)">
+                <mat-icon class="icon" mat-list-icon>unfold_more</mat-icon>
+              </tr>
+            </ng-template>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+    <ng-container *ngIf="shouldExpand">
+      <p>
+        <span>{{ headerName }}</span
+        >:
+      </p>
+      <app-child-tree [childList]="expandList"></app-child-tree>
+    </ng-container>
+  </mat-card-content>
+
